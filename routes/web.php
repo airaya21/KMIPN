@@ -13,3 +13,7 @@ Route::get('/daftar', function () {
 Route::post('/daftar', function () {
     return back()->with('success', 'Login berhasil');
 })->name('daftar.process');
+
+Route::get('/dashboard', function () {
+    return view('admin-dashboard');
+    });
