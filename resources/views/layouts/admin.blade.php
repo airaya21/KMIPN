@@ -51,10 +51,10 @@
         @php
             $menus = [
                 ['route' => 'admin.dashboard',  'icon' => 'grid_view',     'label' => 'Dashboard'],
-                ['route' => 'admin.caregivers', 'icon' => 'videocam',      'label' => 'Monitoring'],
-                ['route' => 'admin.children',   'icon' => 'history',       'label' => 'History'],
-                ['route' => 'admin.reports',    'icon' => 'face',          'label' => 'Children'],
-                ['route' => 'admin.settings',   'icon' => 'bar_chart',     'label' => 'Reports'],
+                ['route' => 'admin.monitoring', 'icon' => 'videocam',      'label' => 'Monitoring'],
+                ['route' => 'admin.history',    'icon' => 'history',       'label' => 'History'],
+                ['route' => 'admin.children',   'icon' => 'face',          'label' => 'Children'],
+                ['route' => 'admin.reports',    'icon' => 'bar_chart',     'label' => 'Reports'],
             ];
         @endphp
 

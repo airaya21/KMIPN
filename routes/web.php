@@ -22,10 +22,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 // ─── Admin Dashboard ──────────────────────────────────────────────────────────
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/caregivers', [App\Http\Controllers\AdminController::class, 'caregivers'])->name('admin.caregivers');
+    Route::get('/admin/monitoring', [App\Http\Controllers\AdminController::class, 'monitoring'])->name('admin.monitoring');
+    Route::get('/admin/history', [App\Http\Controllers\AdminController::class, 'history'])->name('admin.history');
     Route::get('/admin/children',   [App\Http\Controllers\AdminController::class, 'children'])->name('admin.children');
     Route::get('/admin/reports',    [App\Http\Controllers\AdminController::class, 'reports'])->name('admin.reports');
-    Route::get('/admin/settings',   [App\Http\Controllers\AdminController::class, 'settings'])->name('admin.settings');
 });
 
 // ─── Orang Tua Dashboard ──────────────────────────────────────────────────────

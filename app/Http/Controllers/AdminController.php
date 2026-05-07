@@ -12,11 +12,14 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function caregivers()
+    public function monitoring()
     {
-        // Get all caregivers
-        $caregivers = User::where('role', 'caregiver')->get();
-        return view('admin.caregivers', compact('caregivers'));
+        return view('admin.monitoring');
+    }
+
+    public function history()
+    {
+        return view('admin.history');
     }
 
     public function children()
@@ -27,10 +30,5 @@ class AdminController extends Controller
     public function reports()
     {
         return view('admin.reports');
-    }
-
-    public function settings()
-    {
-        return view('admin.settings');
     }
 }
