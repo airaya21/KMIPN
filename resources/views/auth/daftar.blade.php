@@ -180,14 +180,27 @@
             <p class="text-text-secondary text-sm mt-1">Lengkapi data diri untuk menikmati fitur lengkap CERIA.</p>
           </div>
 
-          <form id="registerForm" class="space-y-5" novalidate>
+          {{-- Error dari server --}}
+          @if ($errors->any())
+          <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-start gap-3">
+            <span class="material-symbols-outlined text-red-600 text-xl mt-0.5 shrink-0">error</span>
+            <div class="space-y-0.5">
+              @foreach ($errors->all() as $error)
+                <p class="text-red-700 text-sm font-medium">{{ $error }}</p>
+              @endforeach
+            </div>
+          </div>
+          @endif
+
+          <form id="registerForm" method="POST" action="{{ route('daftar.process') }}" class="space-y-5" novalidate>
+            @csrf
             <!-- Nama Lengkap -->
             <div>
               <label class="block text-xs font-bold uppercase tracking-wide text-text-secondary mb-1.5">Nama lengkap</label>
               <div class="relative">
                 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-hint text-xl">badge</span>
-                <input type="text" id="fullName" name="fullName" placeholder="Contoh: Budi Santoso" 
-                       class="input-field w-full pl-11 pr-4 py-3 rounded-xl text-base bg-white placeholder:text-text-hint/70">
+                 <input type="text" id="fullName" name="name" value="{{ old('name') }}" placeholder="Contoh: Budi Santoso"
+                        class="input-field w-full pl-11 pr-4 py-3 rounded-xl text-base bg-white placeholder:text-text-hint/70 {{ $errors->has('name') ? 'border-red-400' : '' }}">
               </div>
               <div id="fullNameError" class="helper-text hidden text-error"></div>
             </div>
@@ -197,8 +210,8 @@
               <label class="block text-xs font-bold uppercase tracking-wide text-text-secondary mb-1.5">Alamat email</label>
               <div class="relative">
                 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-hint text-xl">mail</span>
-                <input type="email" id="email" name="email" placeholder="contoh@ceria.id" 
-                       class="input-field w-full pl-11 pr-4 py-3 rounded-xl text-base bg-white">
+                 <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="contoh@ceria.id"
+                        class="input-field w-full pl-11 pr-4 py-3 rounded-xl text-base bg-white {{ $errors->has('email') ? 'border-red-400' : '' }}">
               </div>
               <div id="emailError" class="helper-text hidden text-error"></div>
             </div>
@@ -235,7 +248,7 @@
                   <span class="text-sm font-semibold">Pengasuh</span>
                 </div>
               </div>
-              <input type="hidden" id="selectedRole" value="parent">
+              <input type="hidden" id="selectedRole" name="role" value="{{ old('role', 'parent') }}">
             </div>
 
             <!-- Kode Daycare -->
@@ -268,7 +281,7 @@
 
             <!-- Login Link -->
             <div class="text-center">
-              <a href="#" id="loginLink" class="text-primary font-semibold hover:underline transition inline-flex items-center gap-1 text-base">
+              <a href="{{ route('login') }}" class="text-primary font-semibold hover:underline transition inline-flex items-center gap-1 text-base">
                 Masuk ke akun Anda
                 <span class="material-symbols-outlined text-base">login</span>
               </a>
@@ -415,13 +428,12 @@
       }
       
       form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
         const isNameValid = validateFullName();
         const isEmailValid = validateEmail();
         const isPasswordValid = validatePassword();
         
         if (!isNameValid || !isEmailValid || !isPasswordValid) {
+          e.preventDefault();
           globalMsg.innerHTML = '<span class="text-error flex items-center justify-center gap-1"><span class="material-symbols-outlined text-sm">error</span> Mohon periksa kembali data Anda</span>';
           globalMsg.classList.remove('hidden');
           const firstError = document.querySelector('.border-error');
@@ -430,20 +442,8 @@
         }
         
         const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-xl">progress_activity</span> Mendaftarkan...';
-        
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
-          globalMsg.innerHTML = '<span class="text-green-700 bg-green-50 py-2 px-3 rounded-full text-sm flex items-center justify-center gap-2"><span class="material-symbols-outlined text-base">check_circle</span> Pendaftaran berhasil! Selamat datang di CERIA.</span>';
-          globalMsg.classList.remove('hidden');
-          
-          setTimeout(() => {
-            alert('✨ Akun berhasil dibuat! (Demo: halaman selanjutnya akan mengarahkan Anda ke dashboard/login.)');
-          }, 1500);
-        }, 1000);
       });
       
       setActiveRole('parent');
@@ -452,14 +452,6 @@
         input.setAttribute('aria-invalid', 'false');
         input.addEventListener('invalid', (e) => e.preventDefault());
       });
-
-      const loginLink = document.getElementById('loginLink');
-      if (loginLink) {
-        loginLink.addEventListener('click', (e) => {
-          e.preventDefault();
-          alert('🔐 Halaman login akan tersedia segera. (Integrasi dengan sistem autentikasi)');
-        });
-      }
     })();
   </script>
 </body>
