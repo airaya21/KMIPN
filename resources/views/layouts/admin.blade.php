@@ -67,11 +67,19 @@
         @endforeach
     </nav>
 
-    <div class="mt-auto">
+    <div class="mt-auto space-y-3">
         <button class="w-full bg-[#B12222] text-white py-4 px-4 rounded-2xl flex items-center justify-center gap-3 font-bold text-sm shadow-lg shadow-red-200 active:scale-95 transition-all">
             <span class="material-symbols-outlined text-xl">emergency_home</span>
             <span>Emergency Alert</span>
         </button>
+        
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="w-full bg-white text-slate-400 py-4 px-4 rounded-2xl flex items-center justify-center gap-3 font-bold text-sm border border-slate-100 hover:text-red-500 hover:bg-red-50 transition-all">
+                <span class="material-symbols-outlined text-xl">logout</span>
+                <span>Keluar Sistem</span>
+            </button>
+        </form>
     </div>
 </aside>
 

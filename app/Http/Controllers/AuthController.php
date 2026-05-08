@@ -60,8 +60,7 @@ class AuthController extends Controller
             'email'    => $request->email,
             'password' => Hash::make($request->password),
             'role'     => $request->role,
-            // Jika ada kolom daycare_code di tabel users, silakan buka komen di bawah
-            // 'daycare_code' => $request->daycare_code,
+            'daycare_code' => $request->daycare_code,
         ]);
 
         Auth::login($user);

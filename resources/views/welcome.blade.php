@@ -123,7 +123,7 @@
 
                 <!-- Action Button -->
                 <div class="flex items-center gap-3">
-                    <a href="/login" class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white bg-primary-900 rounded-full hover:bg-primary-800 hover:shadow-lg hover:shadow-primary-900/30 transition-all duration-200 active:scale-95">
+                    <a href="{{ route('login') }}" class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white bg-primary-900 rounded-full hover:bg-primary-800 hover:shadow-lg hover:shadow-primary-900/30 transition-all duration-200 active:scale-95">
                         Masuk Portal
                     </a>
                     
@@ -142,7 +142,7 @@
                 <a href="#cara-kerja" class="nav-link-mobile block px-4 py-3 rounded-xl text-base font-medium text-slate-600 hover:text-primary-600 hover:bg-primary-50 transition-colors">Cara Kerja</a>
                 <a href="#keunggulan" class="nav-link-mobile block px-4 py-3 rounded-xl text-base font-medium text-slate-600 hover:text-primary-600 hover:bg-primary-50 transition-colors">Keunggulan</a>
                 <a href="#testimoni" class="nav-link-mobile block px-4 py-3 rounded-xl text-base font-medium text-slate-600 hover:text-primary-600 hover:bg-primary-50 transition-colors">Testimoni</a>
-                <a href="/login" class="block mt-4 px-4 py-3 text-center rounded-xl text-base font-bold text-white bg-primary-900 hover:bg-primary-800 transition-colors sm:hidden">Masuk Portal</a>
+                <a href="{{ route('login') }}" class="block mt-4 px-4 py-3 text-center rounded-xl text-base font-bold text-white bg-primary-900 hover:bg-primary-800 transition-colors sm:hidden">Masuk Portal</a>
             </div>
         </div>
     </nav>
@@ -179,7 +179,7 @@
                         </p>
                         
                         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                            <a href="/login" class="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-primary-900 rounded-full hover:bg-primary-800 hover:shadow-xl hover:shadow-primary-900/30 transition-all duration-200 group">
+                            <a href="{{ route('login') }}" class="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-primary-900 rounded-full hover:bg-primary-800 hover:shadow-xl hover:shadow-primary-900/30 transition-all duration-200 group">
                                 Mulai Sekarang
                                 <span class="material-symbols-outlined ml-2 text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                             </a>
