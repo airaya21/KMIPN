@@ -30,12 +30,18 @@ class AuthController extends Controller
     /** Proses registrasi dan langsung login ke dashboard */
     public function register(Request $request)
     {
-        $request->validate([
+        $rules = [
             'name'     => 'required|string|min:3|max:100',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|regex:/^(?=.*[a-zA-Z])(?=.*[0-9]).+$/',
             'role'     => 'required|in:admin,parent,caregiver',
-        ], [
+        ];
+
+        if ($request->role === 'parent') {
+            $rules['daycare_code'] = 'required|string';
+        }
+
+        $request->validate($rules, [
             'name.required'      => 'Nama lengkap wajib diisi.',
             'name.min'           => 'Nama minimal 3 karakter.',
             'email.required'     => 'Email wajib diisi.',
@@ -46,6 +52,7 @@ class AuthController extends Controller
             'password.regex'     => 'Kata sandi harus kombinasi huruf dan angka.',
             'role.required'      => 'Silakan pilih peran Anda.',
             'role.in'            => 'Peran yang dipilih tidak valid.',
+            'daycare_code.required' => 'Kode daycare wajib diisi untuk Orang Tua.',
         ]);
 
         $user = User::create([
@@ -53,6 +60,8 @@ class AuthController extends Controller
             'email'    => $request->email,
             'password' => Hash::make($request->password),
             'role'     => $request->role,
+            // Jika ada kolom daycare_code di tabel users, silakan buka komen di bawah
+            // 'daycare_code' => $request->daycare_code,
         ]);
 
         Auth::login($user);
@@ -61,36 +70,23 @@ class AuthController extends Controller
         return $this->redirectByRole($user->role);
     }
 
-    /** Proses login dengan validasi role */
+    /** Proses login dengan validasi otomatis role */
     public function login(Request $request)
     {
         $request->validate([
             'email'    => 'required|email',
             'password' => 'required|string',
-            'role'     => 'required|in:admin,parent,caregiver',
         ], [
             'email.required'    => 'Email wajib diisi.',
             'email.email'       => 'Format email tidak valid.',
             'password.required' => 'Kata sandi wajib diisi.',
-            'role.required'     => 'Silakan pilih peran Anda.',
-            'role.in'           => 'Peran yang dipilih tidak valid.',
         ]);
 
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-
             $user = Auth::user();
-
-            // Pastikan role akun sesuai dengan role yang dipilih
-            if ($user->role !== $request->role) {
-                Auth::logout();
-                return back()
-                    ->withErrors(['email' => 'Peran yang dipilih tidak sesuai dengan akun Anda.'])
-                    ->withInput($request->except('password'));
-            }
-
             return $this->redirectByRole($user->role);
         }
 

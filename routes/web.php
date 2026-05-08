@@ -26,6 +26,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/history', [App\Http\Controllers\AdminController::class, 'history'])->name('admin.history');
     Route::get('/admin/children',   [App\Http\Controllers\AdminController::class, 'children'])->name('admin.children');
     Route::get('/admin/reports',    [App\Http\Controllers\AdminController::class, 'reports'])->name('admin.reports');
+    
+    // User Management
+    Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'users'])->name('admin.users');
+    Route::get('/admin/users/create', [App\Http\Controllers\AdminController::class, 'createUser'])->name('admin.users.create');
+    Route::post('/admin/users', [App\Http\Controllers\AdminController::class, 'storeUser'])->name('admin.users.store');
+    Route::delete('/admin/users/{user}', [App\Http\Controllers\AdminController::class, 'deleteUser'])->name('admin.users.delete');
 });
 
 // ─── Orang Tua Dashboard ──────────────────────────────────────────────────────

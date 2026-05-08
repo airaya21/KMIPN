@@ -3,456 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>CERIA · Daftar Akun Baru | Tumbuh Kembang Cerdas</title>
-  <!-- Tailwind + Google Fonts + Material Icons -->
+  <title>CERIA · Daftar Akun</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0" />
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: {
-            'sans': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-          },
+          fontFamily: { 'sans': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'] },
           colors: {
-            primary: '#004275',
-            'primary-dark': '#00315c',
-            'primary-light': '#eef5ff',
-            secondary: '#705d00',
-            accent: '#f5b042',
-            'surface': '#f9f9fc',
-            'surface-card': '#ffffff',
-            'surface-muted': '#f2f2f6',
-            'error': '#ba1a1a',
-            'error-light': '#ffdede',
-            'text-main': '#1A1C1E',
-            'text-secondary': '#5D636B',
-            'text-hint': '#8E939C',
-            border: '#E2E4E8',
-          },
-          borderRadius: {
-            'xl': '1rem',
-            '2xl': '1.5rem',
-            '3xl': '2rem',
-          },
-          boxShadow: {
-            'elevation-sm': '0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05)',
-            'elevation-md': '0 12px 28px -8px rgba(0, 66, 117, 0.12), 0 4px 12px rgba(0, 0, 0, 0.02)',
-            'elevation-lg': '0 20px 32px -12px rgba(0, 66, 117, 0.2)',
-          },
-          keyframes: {
-            'fade-in-up': {
-              '0%': { opacity: '0', transform: 'translateY(12px)' },
-              '100%': { opacity: '1', transform: 'translateY(0)' },
-            }
-          },
-          animation: {
-            'fade-in-up': 'fade-in-up 0.35s ease-out',
+            primary: { 500: '#005DA7', 600: '#004A85' },
           }
         }
       }
     }
   </script>
   <style>
-    body {
-      background: linear-gradient(145deg, #f5f7fc 0%, #f0f2f8 100%);
-    }
-
-    .role-card {
-      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      cursor: pointer;
-      background: #f8f8fc;
-      border: 1.5px solid transparent;
-    }
-
-    .role-card:hover {
-      transform: translateY(-2px);
-      background: #ffffff;
-      border-color: #cbd5e1;
-      box-shadow: 0 6px 12px -6px rgba(0,0,0,0.05);
-    }
-
-    .role-card.active {
-      background: #eef5ff;
-      border-color: #004275;
-      color: #004275;
-      box-shadow: 0 4px 12px rgba(0,66,117,0.08);
-    }
-
-    .role-card.active .material-symbols-outlined {
-      font-variation-settings: 'FILL' 1;
-    }
-
-    .input-field {
-      background-color: #ffffff;
-      border: 1px solid #e2e4e8;
-      transition: all 0.2s ease;
-    }
-
-    .input-field:focus {
-      border-color: #004275;
-      box-shadow: 0 0 0 4px rgba(0,66,117,0.1);
-      outline: none;
-    }
-
-    .input-field:hover:not(:focus) {
-      border-color: #b9c1cc;
-      background-color: #fefefe;
-    }
-
-    button:active {
-      transform: scale(0.98);
-    }
-
-    button:focus-visible, .role-card:focus-visible, a:focus-visible, input:focus-visible {
-      outline: 3px solid #004275;
-      outline-offset: 2px;
-    }
-
-    .helper-text {
-      font-size: 0.75rem;
-      color: #5D636B;
-      margin-top: 0.25rem;
-    }
+    body { background: radial-gradient(circle at top right, #f8faff, #f0f4f8); color: #1e293b; height: 100vh; overflow: hidden; }
+    .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); }
+    .btn-gradient { background: linear-gradient(135deg, #005DA7 0%, #0077D6 100%); transition: all 0.2s ease; }
+    .btn-gradient:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 93, 167, 0.2); }
+    .tab-trigger.active::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 30%; height: 2px; background: #005DA7; transform: translateX(-50%); }
   </style>
 </head>
-<body class="font-sans text-text-main antialiased min-h-screen flex items-center justify-center px-4 py-8 md:py-12">
-  <main class="w-full max-w-[1120px] mx-auto">
-    <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-stretch">
-      
-      <!-- Kiri: Brand & Value Proposition -->
-      <div class="flex-1 flex flex-col justify-center lg:pr-4 space-y-6 animate-fade-in-up">
-        <div class="inline-flex items-center gap-3 bg-white/70 backdrop-blur-sm rounded-full px-4 py-2 w-fit shadow-sm border border-white/40">
-          <span class="w-2.5 h-2.5 bg-primary rounded-full animate-pulse"></span>
-          <span class="text-xs font-bold tracking-wide text-primary uppercase">#TumbuhCERIA</span>
+<body class="font-sans antialiased flex flex-col items-center justify-center p-4">
+  
+  @php
+      $role = request()->get('role', 'parent');
+  @endphp
+
+  <div class="w-full max-w-md text-center mb-4 scale-90">
+    <h1 class="text-xl font-extrabold text-slate-900 tracking-tight">Daftar Akun <span class="text-primary-500">CERIA!</span></h1>
+    <p class="text-slate-400 font-medium text-[10px] uppercase tracking-widest mt-1">Lengkapi data Anda sebagai {{ $role === 'admin' ? 'Admin' : 'Orang Tua' }}</p>
+  </div>
+
+  <div class="w-full max-w-[380px] bg-white/90 glass rounded-[2rem] shadow-xl border border-white p-1 mb-4">
+    <!-- Tabs -->
+    <div class="flex p-0.5 gap-0.5 border-b border-slate-50">
+      <button class="flex-1 py-3 text-xs font-bold text-slate-400 hover:text-slate-600 transition-colors" onclick="window.location.href='{{ route('login') }}'">Masuk</button>
+      <button class="flex-1 py-3 text-xs font-bold tab-trigger active text-primary-500 relative" onclick="window.location.href='{{ route('daftar') }}'">Daftar</button>
+    </div>
+
+    <div class="p-6 pt-4">
+      @if ($errors->any())
+        <div class="mb-4 p-2.5 bg-red-50 border border-red-100 rounded-xl">
+          @foreach ($errors->all() as $error)
+            <p class="text-red-600 text-[9px] font-bold leading-tight">{{ $error }}</p>
+          @endforeach
+        </div>
+      @endif
+
+      <form action="{{ route('daftar.process') }}" method="POST" class="space-y-3">
+        @csrf
+        <input type="hidden" name="role" value="{{ $role }}">
+
+        <div class="flex items-center gap-3 p-2.5 bg-primary-50/50 rounded-xl border border-primary-100/50 mb-2">
+            <div class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-primary-500 shadow-sm shrink-0">
+                <span class="material-symbols-outlined text-lg">{{ $role === 'admin' ? 'apartment' : 'family_restroom' }}</span>
+            </div>
+            <div class="flex-1 overflow-hidden">
+                <p class="text-[9px] font-black uppercase tracking-widest text-slate-400">Daftar Sebagai</p>
+                <p class="text-[11px] font-bold text-slate-800 truncate">{{ $role === 'admin' ? 'Admin Daycare' : 'Orang Tua' }}</p>
+            </div>
+            <a href="{{ route('login') }}#daftar-section" class="px-2 py-1 bg-white/60 rounded-md text-[8px] font-black text-primary-500 uppercase">Ubah</a>
         </div>
 
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.2] tracking-tight text-primary-dark max-w-[700px]">
-          Kelola tumbuh kembang
-          <span class="bg-gradient-to-r from-primary to-[#2c7ab1] bg-clip-text text-transparent">
-            dengan kecerdasan & sentuhan hangat
-          </span>
-        </h1>
-
-        <p class="text-text-secondary text-lg max-w-md">
-          Bergabunglah dengan ribuan orang tua, pengasuh, dan mitra PAUD dalam ekosistem terintegrasi CERIA.
-        </p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 max-w-[700px]">
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full bg-primary-light flex items-center justify-center shrink-0">
-              <span class="material-symbols-outlined text-primary text-[18px]">verified</span>
-            </div>
-            <span class="text-sm font-medium">Data terenkripsi</span>
-          </div>
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full bg-primary-light flex items-center justify-center shrink-0">
-              <span class="material-symbols-outlined text-primary text-[18px]">diversity_3</span>
-            </div>
-            <span class="text-sm font-medium">Kolaborasi real-time</span>
+        <div class="space-y-0.5">
+          <label class="block text-[9px] font-black uppercase tracking-widest text-slate-400 ml-1">Nama</label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 text-lg">person</span>
+            <input type="text" name="name" value="{{ old('name') }}" required placeholder="Nama Lengkap" 
+                   class="w-full pl-10 pr-4 py-2 rounded-xl text-xs bg-slate-50/50 border-transparent focus:border-primary-500/20 focus:bg-white focus:ring-0 transition-all font-medium">
           </div>
         </div>
 
-        <div class="pt-3 flex items-center gap-4 text-text-hint text-sm">
-          <span class="flex items-center gap-1">
-            <span class="material-symbols-outlined text-[18px]">star_rate</span>
-            4.9 / 5
-          </span>
-          <span class="w-1 h-1 rounded-full bg-border"></span>
-          <span>10.000+ pengguna aktif</span>
+        <div class="space-y-0.5">
+          <label class="block text-[9px] font-black uppercase tracking-widest text-slate-400 ml-1">Email</label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 text-lg">mail</span>
+            <input type="email" name="email" value="{{ old('email') }}" required placeholder="nama@email.com" 
+                   class="w-full pl-10 pr-4 py-2 rounded-xl text-xs bg-slate-50/50 border-transparent focus:border-primary-500/20 focus:bg-white focus:ring-0 transition-all font-medium">
+          </div>
         </div>
-      </div>
-      
-      <!-- Kanan: Form Pendaftaran -->
-      <div class="flex-1 max-w-[480px] w-full mx-auto lg:mx-0">
-        <div class="bg-surface-card rounded-3xl shadow-elevation-lg border border-white/50 p-6 md:p-8">
-          
-          <div class="mb-6 text-center md:text-left">
-            <div class="flex items-center justify-center md:justify-start gap-2 mb-1">
-              <div class="w-9 h-9 rounded-xl bg-primary-light flex items-center justify-center">
-                <span class="material-symbols-outlined text-primary text-2xl">diversity_3</span>
-              </div>
-              <span class="font-extrabold text-2xl tracking-tight text-primary-dark">CERIA</span>
-            </div>
-            <h2 class="text-xl md:text-2xl font-bold mt-2">Daftar akun baru</h2>
-            <p class="text-text-secondary text-sm mt-1">Lengkapi data diri untuk menikmati fitur lengkap CERIA.</p>
-          </div>
 
-          {{-- Error dari server --}}
-          @if ($errors->any())
-          <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-start gap-3">
-            <span class="material-symbols-outlined text-red-600 text-xl mt-0.5 shrink-0">error</span>
-            <div class="space-y-0.5">
-              @foreach ($errors->all() as $error)
-                <p class="text-red-700 text-sm font-medium">{{ $error }}</p>
-              @endforeach
-            </div>
-          </div>
-          @endif
-
-          <form id="registerForm" method="POST" action="{{ route('daftar.process') }}" class="space-y-5" novalidate>
-            @csrf
-            <!-- Nama Lengkap -->
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wide text-text-secondary mb-1.5">Nama lengkap</label>
-              <div class="relative">
-                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-hint text-xl">badge</span>
-                 <input type="text" id="fullName" name="name" value="{{ old('name') }}" placeholder="Contoh: Budi Santoso"
-                        class="input-field w-full pl-11 pr-4 py-3 rounded-xl text-base bg-white placeholder:text-text-hint/70 {{ $errors->has('name') ? 'border-red-400' : '' }}">
-              </div>
-              <div id="fullNameError" class="helper-text hidden text-error"></div>
-            </div>
-
-            <!-- Email -->
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wide text-text-secondary mb-1.5">Alamat email</label>
-              <div class="relative">
-                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-hint text-xl">mail</span>
-                 <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="contoh@ceria.id"
-                        class="input-field w-full pl-11 pr-4 py-3 rounded-xl text-base bg-white {{ $errors->has('email') ? 'border-red-400' : '' }}">
-              </div>
-              <div id="emailError" class="helper-text hidden text-error"></div>
-            </div>
-
-            <!-- Kata Sandi -->
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wide text-text-secondary mb-1.5">Kata sandi</label>
-              <div class="relative">
-                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-hint text-xl">lock</span>
-                <input type="password" id="password" name="password" placeholder="Buat sandi yang kuat" 
-                       class="input-field w-full pl-11 pr-12 py-3 rounded-xl bg-white">
-                <button type="button" id="togglePassword" class="absolute right-3 top-1/2 -translate-y-1/2 text-text-hint hover:text-primary transition-colors p-1 rounded-full">
-                  <span class="material-symbols-outlined text-xl">visibility_off</span>
-                </button>
-              </div>
-              <div id="passwordError" class="helper-text hidden text-error"></div>
-              <p class="text-xs text-text-hint mt-1">Minimal 8 karakter, kombinasi huruf dan angka</p>
-            </div>
-
-            <!-- Role -->
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wide text-text-secondary mb-2">Pilih peran Anda</label>
-              <div class="grid grid-cols-3 gap-2.5">
-                <div data-role="admin" class="role-card flex flex-col items-center gap-1 p-3 rounded-xl">
-                  <span class="material-symbols-outlined text-2xl">admin_panel_settings</span>
-                  <span class="text-sm font-semibold">Admin</span>
-                </div>
-                <div data-role="parent" class="role-card flex flex-col items-center gap-1 p-3 rounded-xl active">
-                  <span class="material-symbols-outlined text-2xl">family_restroom</span>
-                  <span class="text-sm font-semibold">Orang Tua</span>
-                </div>
-                <div data-role="caregiver" class="role-card flex flex-col items-center gap-1 p-3 rounded-xl">
-                  <span class="material-symbols-outlined text-2xl">handshake</span>
-                  <span class="text-sm font-semibold">Pengasuh</span>
-                </div>
-              </div>
-              <input type="hidden" id="selectedRole" name="role" value="{{ old('role', 'parent') }}">
-            </div>
-
-            <!-- Kode Daycare -->
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wide text-text-secondary mb-1.5">Kode daycare <span class="font-normal lowercase text-text-hint">(opsional)</span></label>
-              <div class="relative">
-                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-hint text-xl">apartment</span>
-                <input type="text" id="daycareCode" maxlength="8" placeholder="Contoh: CDC-1234" 
-                       class="input-field w-full pl-11 pr-4 py-3 rounded-xl bg-white">
-              </div>
-              <p class="helper-text">Masukkan kode daycare jika Anda sudah memiliki undangan dari lembaga</p>
-            </div>
-
-            <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl shadow-md shadow-primary/20 transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 mt-2 text-base">
-              <span class="material-symbols-outlined text-xl">how_to_reg</span>
-              Daftar Sekarang
+        <div class="space-y-0.5">
+          <label class="block text-[9px] font-black uppercase tracking-widest text-slate-400 ml-1">Password</label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 text-lg">lock</span>
+            <input type="password" id="password" name="password" required placeholder="Min. 8 Karakter" 
+                   class="w-full pl-10 pr-10 py-2 rounded-xl text-xs bg-slate-50/50 border-transparent focus:border-primary-500/20 focus:bg-white focus:ring-0 transition-all font-medium">
+            <button type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-300 hover:text-primary-500">
+              <span class="material-symbols-outlined text-lg" id="pw-icon">visibility_off</span>
             </button>
-
-            <div id="formGlobalMsg" class="text-center text-sm mt-2"></div>
-
-            <!-- Pemisah -->
-            <div class="relative my-5">
-              <div class="absolute inset-0 flex items-center">
-                <div class="w-full border-t border-border"></div>
-              </div>
-              <div class="relative flex justify-center text-xs">
-                <span class="bg-surface-card px-3 text-text-hint">Sudah punya akun?</span>
-              </div>
-            </div>
-
-            <!-- Login Link -->
-            <div class="text-center">
-              <a href="{{ route('login') }}" class="text-primary font-semibold hover:underline transition inline-flex items-center gap-1 text-base">
-                Masuk ke akun Anda
-                <span class="material-symbols-outlined text-base">login</span>
-              </a>
-              <p class="text-text-hint text-xs mt-1">Klik di sini jika Anda sudah terdaftar</p>
-            </div>
-          </form>
+          </div>
         </div>
-        
-        <!-- Footer kepercayaan -->
-        <div class="text-center mt-5 flex justify-center gap-6 text-[11px] font-medium text-text-hint">
-          <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">shield_lock</span> Perlindungan data</span>
-          <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">support_agent</span> Bantuan 24/7</span>
-        </div>
-      </div>
-    </div>
 
-    <!-- Footer bawah: benefit utama -->
-    <div class="mt-16 border-t border-border/60 pt-8 flex flex-wrap justify-center gap-x-12 gap-y-4 text-text-secondary text-sm">
-      <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">check_circle</span> Pantau tumbuh kembang anak</div>
-      <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">auto_awesome</span> Rekomendasi aktivitas berbasis AI</div>
-      <div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">calendar_month</span> Laporan harian & bulanan</div>
+        @if($role === 'parent')
+        <div class="space-y-0.5">
+          <label class="block text-[9px] font-black uppercase tracking-widest text-slate-400 ml-1">Kode Daycare</label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 text-lg">key</span>
+            <input type="text" name="daycare_code" value="{{ old('daycare_code') }}" required placeholder="Contoh: CDC-1234" 
+                   class="w-full pl-10 pr-4 py-2 rounded-xl text-xs bg-slate-50/50 border-transparent focus:border-primary-500/20 focus:bg-white focus:ring-0 transition-all font-medium">
+          </div>
+        </div>
+        @endif
+
+        <div class="pt-2">
+            <button type="submit" class="btn-gradient w-full text-white font-extrabold py-2.5 rounded-xl flex items-center justify-center gap-2 text-xs tracking-wide">
+                Daftar Akun
+                <span class="material-symbols-outlined text-lg">how_to_reg</span>
+            </button>
+        </div>
+      </form>
     </div>
-  </main>
+  </div>
+
+  <footer class="mt-8 flex gap-6 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+      <a href="{{ route('login') }}" class="text-primary-500">Batal</a>
+      <a href="#" class="hover:text-primary-500">Privasi</a>
+      <span>© 2026 CERIA</span>
+  </footer>
 
   <script>
-    (function() {
-      const roleCards = document.querySelectorAll('[data-role]');
-      const roleHidden = document.getElementById('selectedRole');
-      const togglePasswordBtn = document.getElementById('togglePassword');
-      const passwordInput = document.getElementById('password');
-      const form = document.getElementById('registerForm');
-      
-      const fullNameError = document.getElementById('fullNameError');
-      const emailError = document.getElementById('emailError');
-      const passwordError = document.getElementById('passwordError');
-      const globalMsg = document.getElementById('formGlobalMsg');
-
-      const fullNameInput = document.getElementById('fullName');
-      const emailInput = document.getElementById('email');
-      const pwInput = document.getElementById('password');
-
-      function setError(element, errorDiv, message) {
-        if (message) {
-          errorDiv.innerText = message;
-          errorDiv.classList.remove('hidden');
-          element.classList.add('border-error', 'bg-error-light/10');
-        } else {
-          errorDiv.classList.add('hidden');
-          element.classList.remove('border-error', 'bg-error-light/10');
-        }
+    function togglePassword() {
+      const input = document.getElementById('password');
+      const icon = document.getElementById('pw-icon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.innerText = 'visibility';
+      } else {
+        input.type = 'password';
+        icon.innerText = 'visibility_off';
       }
-
-      function validateFullName() {
-        const val = fullNameInput.value.trim();
-        if (val === '') {
-          setError(fullNameInput, fullNameError, 'Nama lengkap tidak boleh kosong');
-          return false;
-        }
-        if (val.length < 3) {
-          setError(fullNameInput, fullNameError, 'Minimal 3 karakter');
-          return false;
-        }
-        setError(fullNameInput, fullNameError, null);
-        return true;
-      }
-
-      function validateEmail() {
-        const email = emailInput.value.trim();
-        const emailPattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
-        if (!email) {
-          setError(emailInput, emailError, 'Email wajib diisi');
-          return false;
-        }
-        if (!emailPattern.test(email)) {
-          setError(emailInput, emailError, 'Masukkan email yang valid (contoh: nama@domain.com)');
-          return false;
-        }
-        setError(emailInput, emailError, null);
-        return true;
-      }
-
-      function validatePassword() {
-        const pwd = pwInput.value;
-        if (pwd.length === 0) {
-          setError(pwInput, passwordError, 'Kata sandi diperlukan');
-          return false;
-        }
-        if (pwd.length < 8) {
-          setError(pwInput, passwordError, 'Kata sandi minimal 8 karakter');
-          return false;
-        }
-        const hasLetter = /[a-zA-Z]/.test(pwd);
-        const hasNumber = /[0-9]/.test(pwd);
-        if (!hasLetter || !hasNumber) {
-          setError(pwInput, passwordError, 'Gunakan kombinasi huruf dan angka agar lebih aman');
-          return false;
-        }
-        setError(pwInput, passwordError, null);
-        return true;
-      }
-
-      fullNameInput.addEventListener('blur', validateFullName);
-      emailInput.addEventListener('blur', validateEmail);
-      pwInput.addEventListener('blur', validatePassword);
-      
-      function setActiveRole(roleValue) {
-        roleCards.forEach(card => {
-          const cardRole = card.getAttribute('data-role');
-          if (cardRole === roleValue) {
-            card.classList.add('active');
-          } else {
-            card.classList.remove('active');
-          }
-        });
-        roleHidden.value = roleValue;
-      }
-      
-      roleCards.forEach(card => {
-        card.addEventListener('click', () => {
-          const roleVal = card.getAttribute('data-role');
-          setActiveRole(roleVal);
-        });
-        card.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            const roleVal = card.getAttribute('data-role');
-            setActiveRole(roleVal);
-          }
-        });
-        card.setAttribute('tabindex', '0');
-        card.setAttribute('role', 'button');
-        const roleName = card.querySelector('span:last-child')?.innerText || '';
-        card.setAttribute('aria-label', `Pilih peran ${roleName}`);
-      });
-      
-      if (togglePasswordBtn && passwordInput) {
-        let isPasswordVisible = false;
-        togglePasswordBtn.addEventListener('click', () => {
-          isPasswordVisible = !isPasswordVisible;
-          passwordInput.type = isPasswordVisible ? 'text' : 'password';
-          const iconSpan = togglePasswordBtn.querySelector('.material-symbols-outlined');
-          if (iconSpan) iconSpan.innerText = isPasswordVisible ? 'visibility' : 'visibility_off';
-        });
-      }
-      
-      form.addEventListener('submit', (e) => {
-        const isNameValid = validateFullName();
-        const isEmailValid = validateEmail();
-        const isPasswordValid = validatePassword();
-        
-        if (!isNameValid || !isEmailValid || !isPasswordValid) {
-          e.preventDefault();
-          globalMsg.innerHTML = '<span class="text-error flex items-center justify-center gap-1"><span class="material-symbols-outlined text-sm">error</span> Mohon periksa kembali data Anda</span>';
-          globalMsg.classList.remove('hidden');
-          const firstError = document.querySelector('.border-error');
-          if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          return;
-        }
-        
-        const submitBtn = form.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-xl">progress_activity</span> Mendaftarkan...';
-      });
-      
-      setActiveRole('parent');
-      
-      document.querySelectorAll('.input-field').forEach(input => {
-        input.setAttribute('aria-invalid', 'false');
-        input.addEventListener('invalid', (e) => e.preventDefault());
-      });
-    })();
+    }
   </script>
 </body>
 </html>

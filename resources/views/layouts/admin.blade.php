@@ -51,6 +51,7 @@
         @php
             $menus = [
                 ['route' => 'admin.dashboard',  'icon' => 'grid_view',     'label' => 'Dashboard'],
+                ['route' => 'admin.users',      'icon' => 'group',         'label' => 'Users'],
                 ['route' => 'admin.monitoring', 'icon' => 'videocam',      'label' => 'Monitoring'],
                 ['route' => 'admin.history',    'icon' => 'history',       'label' => 'History'],
                 ['route' => 'admin.children',   'icon' => 'face',          'label' => 'Children'],
