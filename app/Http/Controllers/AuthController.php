@@ -34,7 +34,7 @@ class AuthController extends Controller
             'name'     => 'required|string|min:3|max:100',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|regex:/^(?=.*[a-zA-Z])(?=.*[0-9]).+$/',
-            'role'     => 'required|in:admin,parent,caregiver',
+            'role'     => 'required|in:superadmin,admin,parent,caregiver',
         ];
 
         if ($request->role === 'parent') {
@@ -108,6 +108,7 @@ class AuthController extends Controller
     private function redirectByRole(string $role)
     {
         return match ($role) {
+            'superadmin'=> redirect()->route('superadmin.dashboard'),
             'admin'     => redirect()->route('admin.dashboard'),
             'parent'    => redirect()->route('parent.dashboard'),
             'caregiver' => redirect()->route('caregiver.dashboard'),

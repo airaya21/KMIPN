@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // Tambah kolom role setelah kolom name
-            $table->enum('role', ['admin', 'parent', 'caregiver'])
+            $table->enum('role', ['superadmin', 'admin', 'parent', 'caregiver'])
                   ->default('parent')
                   ->after('name');
         });

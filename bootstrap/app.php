@@ -14,6 +14,16 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
         ]);
+        $middleware->redirectUsersTo(function () {
+            $role = auth()->user()?->role;
+            return match ($role) {
+                'superadmin' => '/superadmin/dashboard',
+                'admin'      => '/admin/dashboard',
+                'parent'     => '/parent/dashboard',
+                'caregiver'  => '/caregiver/dashboard',
+                default      => '/',
+            };
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
