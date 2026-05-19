@@ -18,13 +18,31 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    /** Tampilkan halaman daftar */
-    public function showRegister()
+    /** Tampilkan halaman daftar Parent */
+    public function showRegisterParent()
     {
         if (Auth::check()) {
             return $this->redirectByRole(Auth::user()->role);
         }
-        return view('auth.daftar');
+        return view('auth.register-parent');
+    }
+
+    /** Tampilkan halaman daftar Daycare */
+    public function showRegisterDaycare()
+    {
+        if (Auth::check()) {
+            return $this->redirectByRole(Auth::user()->role);
+        }
+        return view('auth.register-daycare');
+    }
+
+    /** Tampilkan halaman login Superadmin */
+    public function showSuperAdminLogin()
+    {
+        if (Auth::check()) {
+            return $this->redirectByRole(Auth::user()->role);
+        }
+        return view('auth.superadmin-login');
     }
 
     /** Proses registrasi dan langsung login ke dashboard */
@@ -69,7 +87,7 @@ class AuthController extends Controller
         return $this->redirectByRole($user->role);
     }
 
-    /** Proses login dengan validasi otomatis role */
+    /** Proses login dengan validasi otomatis role (Khusus Publik: Parent, Admin, Caregiver) */
     public function login(Request $request)
     {
         $request->validate([
@@ -84,13 +102,48 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate();
             $user = Auth::user();
+
+            // Mencegah superadmin login lewat portal publik
+            if ($user->role === 'superadmin') {
+                Auth::logout();
+                return back()->withErrors(['email' => 'Akun tidak ditemukan atau akses ditolak.']);
+            }
+
+            $request->session()->regenerate();
             return $this->redirectByRole($user->role);
         }
 
         return back()
             ->withErrors(['email' => 'Email atau kata sandi salah. Silakan coba lagi.'])
+            ->withInput($request->except('password'));
+    }
+
+    /** Proses login khusus Superadmin */
+    public function superAdminLogin(Request $request)
+    {
+        $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
+            $user = Auth::user();
+
+            // Hanya superadmin yang boleh login lewat sini
+            if ($user->role !== 'superadmin') {
+                Auth::logout();
+                return back()->withErrors(['email' => 'Akses ditolak. Anda bukan Superadmin.']);
+            }
+
+            $request->session()->regenerate();
+            return $this->redirectByRole($user->role);
+        }
+
+        return back()
+            ->withErrors(['email' => 'Email atau kata sandi salah.'])
             ->withInput($request->except('password'));
     }
 

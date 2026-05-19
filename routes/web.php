@@ -13,8 +13,13 @@ Route::middleware('guest')->group(function () {
     Route::get('/login',   [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login',  [AuthController::class, 'login'])->name('login.process');
 
-    Route::get('/daftar',  [AuthController::class, 'showRegister'])->name('daftar');
-    Route::post('/daftar', [AuthController::class, 'register'])->name('daftar.process');
+    Route::get('/register/parent',  [AuthController::class, 'showRegisterParent'])->name('register.parent');
+    Route::get('/register/daycare', [AuthController::class, 'showRegisterDaycare'])->name('register.daycare');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.process');
+
+    // Superadmin Login (Private)
+    Route::get('/superadmin/login', [AuthController::class, 'showSuperAdminLogin'])->name('superadmin.login');
+    Route::post('/superadmin/login', [AuthController::class, 'superAdminLogin'])->name('superadmin.login.process');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
