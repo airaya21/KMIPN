@@ -87,6 +87,7 @@
             ['route' => 'parent.children',  'icon' => 'child_care',     'label' => 'Data Anak'],
             ['route' => 'parent.activity',  'icon' => 'calendar_month', 'label' => 'Aktivitas'],
             ['route' => 'parent.reports',   'icon' => 'analytics',      'label' => 'Laporan'],
+            ['route' => 'parent.pickup',    'icon' => 'directions_car', 'label' => 'Penjemputan'],
             ['route' => 'parent.messages',  'icon' => 'forum',          'label' => 'Pesan'],
         ];
     @endphp
