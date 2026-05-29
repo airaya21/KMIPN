@@ -1,185 +1,266 @@
 @extends('layouts.admin')
 
-@section('title', 'Live Monitoring')
+@section('title', 'Monitoring Hub')
 
 @section('content')
-<div class="grid grid-cols-12 gap-8">
-    
-    {{-- LEFT SIDE (8 Columns) --}}
-    <div class="col-span-12 lg:col-span-8 space-y-8">
-        
-        {{-- HEADER INFO --}}
-        <div class="flex items-center gap-4">
-            <h3 class="text-slate-500 font-medium text-sm">Live Monitoring</h3>
-            <div class="flex items-center gap-2 bg-green-50 text-green-600 px-3 py-1 rounded-full border border-green-100">
-                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span class="text-[10px] font-black uppercase tracking-wider">LIVE - Camera 01 (Toddler Room)</span>
-            </div>
+<div class="space-y-6">
+
+    {{-- HEADER --}}
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <h2 class="text-xl font-black text-slate-800">Monitoring Hub</h2>
+            <span class="flex items-center gap-1.5 bg-red-50 text-red-500 border border-red-100 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                <span class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
+                LIVE NOW
+            </span>
         </div>
-
-        {{-- VIDEO FEED --}}
-        <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100/50">
-            <div class="relative aspect-video rounded-3xl overflow-hidden bg-slate-900 shadow-inner group">
-                <img src="https://images.unsplash.com/photo-1560421683-6856ea585c78?w=1200&fit=crop" class="w-full h-full object-cover opacity-80">
-                
-                {{-- Overlays --}}
-                <div class="absolute inset-0 p-8 pointer-events-none">
-                    {{-- Child 1 Marker --}}
-                    <div class="absolute top-1/4 left-1/2 -translate-x-1/2">
-                        <div class="bg-blue-500/90 backdrop-blur-md text-white px-4 py-2 rounded-full flex items-center gap-2 shadow-lg border border-blue-400/50 transform transition-transform group-hover:scale-105">
-                            <span class="material-symbols-outlined text-sm">bed</span>
-                            <span class="text-[10px] font-bold">Arka: Posisi Tidur Aman</span>
-                        </div>
-                        <div class="mt-2 w-24 h-24 border-2 border-dashed border-blue-400 rounded-full mx-auto opacity-40"></div>
-                    </div>
-
-                    {{-- Child 2 Marker --}}
-                    <div class="absolute bottom-1/4 left-1/3">
-                        <div class="bg-green-500/90 backdrop-blur-md text-white px-4 py-2 rounded-full flex items-center gap-2 shadow-lg border border-green-400/50 transform transition-transform group-hover:scale-105">
-                            <span class="material-symbols-outlined text-sm">smart_toy</span>
-                            <span class="text-[10px] font-bold">Cia: Anak Sedang Bermain</span>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Camera UI --}}
-                <div class="absolute top-6 left-6 text-white/70 text-[9px] font-bold tracking-widest bg-black/20 backdrop-blur px-3 py-1 rounded uppercase">
-                    CAM_01 // 24.5°C // 10:45:12 AM
-                </div>
-
-                {{-- Controls --}}
-                <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between">
-                    <div class="flex items-center gap-4 bg-black/30 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10">
-                        <button class="text-white hover:text-green-400"><span class="material-symbols-outlined text-xl">pause_circle</span></button>
-                        <button class="text-white hover:text-green-400"><span class="material-symbols-outlined text-xl">volume_up</span></button>
-                        <div class="w-px h-4 bg-white/20 mx-1"></div>
-                        <p class="text-white text-[10px] font-bold">Bilik Melati - Lantai 2</p>
-                    </div>
-                    
-                    <div class="flex items-center gap-3">
-                        <button class="flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-xl border border-white/20 text-[10px] font-bold transition-all">
-                            <span class="material-symbols-outlined text-sm">photo_camera</span> Snapshot
-                        </button>
-                        <button class="flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-xl border border-white/20 text-[10px] font-bold transition-all">
-                            <span class="material-symbols-outlined text-sm">radio_button_checked</span> Record
-                        </button>
-                        <button class="flex items-center gap-2 bg-[#00658D] hover:bg-[#005F8D] text-white px-6 py-2 rounded-xl text-[10px] font-bold transition-all shadow-lg shadow-blue-900/20">
-                            <span class="material-symbols-outlined text-sm">fullscreen</span> Fullscreen
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- AI SMART ALERTS --}}
-        <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100/50 relative overflow-hidden">
-            <div class="absolute left-0 top-0 w-1.5 h-full bg-amber-400"></div>
-            <div class="flex items-center justify-between mb-8">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-xl">warning</span>
-                    </div>
-                    <h3 class="text-slate-800 font-bold text-base">AI Smart Alerts</h3>
-                </div>
-                <button class="text-brand-blue text-xs font-bold hover:underline">View All Notifications</button>
-            </div>
-
-            <div class="grid grid-cols-2 gap-6">
-                {{-- Alert 1 --}}
-                <div class="bg-slate-50/50 p-5 rounded-2xl border border-slate-100 flex items-center gap-4 group cursor-pointer hover:bg-white hover:shadow-md transition-all">
-                    <div class="w-12 h-12 rounded-full bg-red-50 text-red-500 flex items-center justify-center shrink-0 border-2 border-white shadow-sm">
-                        <span class="material-symbols-outlined text-xl">person_alert</span>
-                    </div>
-                    <div>
-                        <h4 class="text-slate-800 font-bold text-sm">Unknown Person Detected</h4>
-                        <p class="text-[10px] text-slate-400 font-bold uppercase mt-1">Area: Front Gate (10:30 AM)</p>
-                    </div>
-                </div>
-
-                {{-- Alert 2 --}}
-                <div class="bg-slate-50/50 p-5 rounded-2xl border border-slate-100 flex items-center gap-4 group cursor-pointer hover:bg-white hover:shadow-md transition-all">
-                    <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center shrink-0 border-2 border-white shadow-sm">
-                        <span class="material-symbols-outlined text-xl">mood_bad</span>
-                    </div>
-                    <div>
-                        <h4 class="text-slate-800 font-bold text-sm">Cia is Crying</h4>
-                        <p class="text-[10px] text-slate-400 font-bold uppercase mt-1">Action: Caretaker notified (10:42 AM)</p>
-                    </div>
-                </div>
+        <div class="flex items-center gap-3">
+            <div class="relative">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 text-sm">search</span>
+                <input type="text" placeholder="Search children or staff..." class="bg-white border border-slate-200 rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 placeholder:text-slate-300 w-56 transition-all">
             </div>
         </div>
     </div>
 
-    {{-- RIGHT SIDE (4 Columns) --}}
-    <div class="col-span-12 lg:col-span-4 space-y-8">
-        
-        {{-- DAILY TIMELINE --}}
-        <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100/50 flex flex-col h-[680px]">
-            <div class="flex items-center justify-between mb-8">
-                <h3 class="text-slate-800 font-bold text-base">Daily Timeline</h3>
-                <button class="text-slate-300 hover:text-slate-500"><span class="material-symbols-outlined">more_vert</span></button>
+    {{-- STATS BAR --}}
+    <div class="grid grid-cols-4 gap-4">
+        {{-- Total Children --}}
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100/50 flex items-center gap-4">
+            <div class="w-11 h-11 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center">
+                <span class="material-symbols-outlined text-xl">child_care</span>
             </div>
+            <div>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Total Children</p>
+                <p class="text-3xl font-black text-slate-800 leading-none mt-1">24</p>
+            </div>
+        </div>
 
-            <div class="flex-1 space-y-8 relative before:content-[''] before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-50">
-                
-                {{-- Current Activity --}}
-                <div class="relative pl-12">
-                    <div class="absolute left-0 top-0 w-10 h-10 bg-white rounded-full flex items-center justify-center text-green-500 border-2 border-green-500 z-10 shadow-sm">
-                        <span class="w-2.5 h-2.5 bg-green-500 rounded-full"></span>
-                    </div>
-                    <div class="bg-[#F0FAF4] p-5 rounded-2xl border border-green-100/50">
-                        <h4 class="text-green-800 font-black text-[10px] uppercase tracking-widest mb-2">Currently</h4>
-                        <p class="text-green-800/80 text-xs leading-relaxed font-semibold">
-                            Nap Time: Bilik Melati<br>
-                            <span class="text-green-600/60 font-medium">Ambient temperature optimal at 24°C</span>
-                        </p>
-                    </div>
-                </div>
+        {{-- Active Alerts --}}
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100/50 flex items-center gap-4">
+            <div class="w-11 h-11 rounded-xl bg-red-50 text-red-500 flex items-center justify-center">
+                <span class="material-symbols-outlined text-xl">notifications_active</span>
+            </div>
+            <div>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Active Alerts</p>
+                <p class="text-3xl font-black text-red-500 leading-none mt-1">03</p>
+            </div>
+        </div>
 
-                {{-- Activity 1 --}}
-                <div class="relative pl-12">
-                    <div class="absolute left-0 top-2 w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-300 border-4 border-white z-10">
-                        <span class="w-1.5 h-1.5 bg-slate-300 rounded-full"></span>
+        {{-- CCTV Status --}}
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100/50 flex items-center gap-4">
+            <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center">
+                <span class="material-symbols-outlined text-xl">videocam</span>
+            </div>
+            <div>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">CCTV Status</p>
+                <p class="text-3xl font-black text-slate-800 leading-none mt-1">12<span class="text-base text-slate-300 font-bold">/12</span></p>
+                <p class="text-[10px] text-green-500 font-bold mt-0.5">Online</p>
+            </div>
+        </div>
+
+        {{-- Staff Active --}}
+        <div class="bg-accent rounded-2xl p-5 shadow-[0_8px_18px_rgba(255,214,0,0.35)] flex items-center gap-4">
+            <div class="w-11 h-11 rounded-xl bg-black/10 text-primary-900 flex items-center justify-center">
+                <span class="material-symbols-outlined text-xl">badge</span>
+            </div>
+            <div>
+                <p class="text-[10px] text-primary-900/60 font-bold uppercase tracking-wider">Staff Active</p>
+                <p class="text-3xl font-black text-primary-900 leading-none mt-1">08</p>
+            </div>
+        </div>
+    </div>
+
+    {{-- MAIN CONTENT --}}
+    <div class="grid grid-cols-12 gap-6">
+
+        {{-- CAMERA GRID (left 8 cols) --}}
+        <div class="col-span-12 lg:col-span-8">
+            <div class="grid grid-cols-2 gap-4">
+
+                {{-- CAM 04 - Arka Raditya --}}
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100/50 overflow-hidden">
+                    <div class="relative aspect-video bg-slate-900 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=600&fit=crop" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-black/40 backdrop-blur text-white text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded">CAM-04 (Play Area)</div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1 bg-red-500/90 text-white text-[9px] font-black px-2 py-1 rounded-md">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span> LIVE
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-[10px] font-black text-slate-300 uppercase mb-1">10:00 AM</p>
-                        <h4 class="text-slate-800 font-bold text-sm">Outdoor Activity: Playground</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed mt-1">Engaged in social play for 45 minutes.</p>
-                        <div class="mt-3 flex gap-2">
-                            <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=100&h=100&fit=crop" class="w-12 h-12 rounded-lg object-cover shadow-sm">
-                            <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=100&h=100&fit=crop" class="w-12 h-12 rounded-lg object-cover shadow-sm">
+                    <div class="p-4">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Arka+Raditya&background=005da7&color=fff&size=40" class="w-10 h-10 rounded-full">
+                                <div>
+                                    <h4 class="text-slate-800 font-bold text-sm">Arka Raditya</h4>
+                                    <p class="text-slate-400 text-xs">Parent: Ibu Sari Widya</p>
+                                </div>
+                            </div>
+                            <span class="flex items-center gap-1 bg-primary-50 text-primary-700 border border-primary-100 px-2 py-1 rounded-full text-[10px] font-black">
+                                <span class="material-symbols-outlined text-sm">extension</span> Playing with Blocks
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between border-t border-slate-50 pt-3">
+                            <div class="flex items-center gap-2">
+                                <img src="https://ui-avatars.com/api/?name=Kak+Mia&background=10b981&color=fff&size=28" class="w-7 h-7 rounded-full">
+                                <span class="text-slate-500 text-xs font-medium">Caregiver: Kak Mia</span>
+                            </div>
+                            <button class="text-primary-700 text-[10px] font-black hover:underline">View History</button>
                         </div>
                     </div>
                 </div>
 
-                {{-- Activity 2 --}}
-                <div class="relative pl-12">
-                    <div class="absolute left-0 top-2 w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-300 border-4 border-white z-10">
-                        <span class="w-1.5 h-1.5 bg-slate-300 rounded-full"></span>
+                {{-- CAM 01 - Luna Aisyah --}}
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100/50 overflow-hidden">
+                    <div class="relative aspect-video bg-slate-900 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1560421683-6856ea585c78?w=600&fit=crop" class="w-full h-full object-cover opacity-60">
+                        <div class="absolute top-3 left-3 bg-black/40 backdrop-blur text-white text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded">CAM-01 (Quiet Room)</div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white">
+                                <span class="material-symbols-outlined text-2xl">bedtime</span>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-[10px] font-black text-slate-300 uppercase mb-1">08:30 AM</p>
-                        <h4 class="text-slate-800 font-bold text-sm">Nutritious Breakfast</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed mt-1">Menu: Oatmeal with Fresh Bananas.</p>
-                        <div class="mt-3 bg-slate-50/80 p-3 rounded-xl border border-slate-100 flex items-center gap-3">
-                            <span class="material-symbols-outlined text-blue-500 text-sm">restaurant</span>
-                            <span class="text-[10px] font-bold text-slate-500">Consumed 90% of portion</span>
+                    <div class="p-4">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Luna+Aisyah&background=f59e0b&color=fff&size=40" class="w-10 h-10 rounded-full">
+                                <div>
+                                    <h4 class="text-slate-800 font-bold text-sm">Luna Aisyah</h4>
+                                    <p class="text-slate-400 text-xs">Parent: Bp. Doni Setiawan</p>
+                                </div>
+                            </div>
+                            <span class="flex items-center gap-1 bg-purple-50 text-purple-600 border border-purple-100 px-2 py-1 rounded-full text-[10px] font-black">
+                                <span class="material-symbols-outlined text-sm">bedtime</span> Napping
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between border-t border-slate-50 pt-3">
+                            <div class="flex items-center gap-2">
+                                <img src="https://ui-avatars.com/api/?name=Kak+Rian&background=8b5cf6&color=fff&size=28" class="w-7 h-7 rounded-full">
+                                <span class="text-slate-500 text-xs font-medium">Caregiver: Kak Rian</span>
+                            </div>
+                            <button class="text-primary-700 text-[10px] font-black hover:underline">View History</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="relative pl-12">
-                    <p class="text-[10px] font-black text-slate-300 uppercase">07:45 AM</p>
+                {{-- CAM 07 - Kenzo Alfatih --}}
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100/50 overflow-hidden">
+                    <div class="relative aspect-video bg-slate-900 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&fit=crop" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-black/40 backdrop-blur text-white text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded">CAM-07 (Dining)</div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1 bg-red-500/90 text-white text-[9px] font-black px-2 py-1 rounded-md">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span> LIVE
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Kenzo+Alfatih&background=ec4899&color=fff&size=40" class="w-10 h-10 rounded-full">
+                                <div>
+                                    <h4 class="text-slate-800 font-bold text-sm">Kenzo Alfatih</h4>
+                                    <p class="text-slate-400 text-xs">Parent: Ibu Maya Putri</p>
+                                </div>
+                            </div>
+                            <span class="flex items-center gap-1 bg-green-50 text-green-600 border border-green-100 px-2 py-1 rounded-full text-[10px] font-black">
+                                <span class="material-symbols-outlined text-sm">restaurant</span> Eating
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between border-t border-slate-50 pt-3">
+                            <div class="flex items-center gap-2">
+                                <img src="https://ui-avatars.com/api/?name=Kak+Sari&background=f97316&color=fff&size=28" class="w-7 h-7 rounded-full">
+                                <span class="text-slate-500 text-xs font-medium">Caregiver: Kak Sari</span>
+                            </div>
+                            <button class="text-primary-700 text-[10px] font-black hover:underline">View History</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <button class="mt-8 w-full border border-slate-200 text-slate-600 py-3.5 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-slate-50 transition-all">
-                <span class="material-symbols-outlined text-sm">download</span>
-                Download Full Day Report
-            </button>
+                {{-- Add Monitor View --}}
+                <div class="bg-slate-50/80 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center gap-3 min-h-[200px] cursor-pointer hover:bg-primary-50/40 hover:border-primary-400 transition-all group">
+                    <div class="w-14 h-14 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-300 group-hover:text-primary-600 transition-colors">
+                        <span class="material-symbols-outlined text-3xl">add_a_photo</span>
+                    </div>
+                    <p class="text-slate-400 font-bold text-sm group-hover:text-primary-700 transition-colors">Add Monitor View</p>
+                </div>
+
+            </div>
+        </div>
+
+        {{-- ACTIVE ALERTS PANEL (right 4 cols) --}}
+        <div class="col-span-12 lg:col-span-4">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100/50 p-6 space-y-5">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <h3 class="text-slate-800 font-bold text-base">Active Alerts</h3>
+                        <span class="w-6 h-6 rounded-full bg-red-500 text-white text-[10px] font-black flex items-center justify-center">3</span>
+                    </div>
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Real-time</span>
+                </div>
+
+                {{-- Alert 1 - Critical --}}
+                <div class="bg-red-50 border border-red-100 rounded-2xl p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-full bg-red-100 text-red-500 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-lg">warning</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-red-700 font-black text-sm">Child Crying Detected</h4>
+                                <span class="text-red-400 text-[10px] font-bold">2m ago</span>
+                            </div>
+                            <p class="text-red-500/70 text-xs mt-0.5">Area: Quiet Room (CAM-01)</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white text-[10px] font-black py-2 rounded-xl transition-all">Lihat Detail</button>
+                        <button class="flex-1 bg-white border border-red-200 text-red-500 hover:bg-red-50 text-[10px] font-black py-2 rounded-xl transition-all">Hubungi Pengasuh</button>
+                    </div>
+                </div>
+
+                {{-- Alert 2 - Warning --}}
+                <div class="bg-amber-50 border border-amber-100 rounded-2xl p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-full bg-amber-100 text-amber-500 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-lg">alarm</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-amber-700 font-black text-sm">Sudah Bangun</h4>
+                                <span class="text-amber-400 text-[10px] font-bold">5m ago</span>
+                            </div>
+                            <p class="text-amber-500/70 text-xs mt-0.5">Arka Raditya – Quiet Room</p>
+                        </div>
+                    </div>
+                    <button class="w-full bg-amber-500 hover:bg-amber-600 text-white text-[10px] font-black py-2 rounded-xl transition-all">Assign Task</button>
+                </div>
+
+                {{-- Alert 3 - Info --}}
+                <div class="bg-primary-50 border border-primary-100 rounded-2xl p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-lg">check_circle</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-primary-800 font-black text-sm">Meal Finished</h4>
+                                <span class="text-primary-400 text-[10px] font-bold">12m ago</span>
+                            </div>
+                            <p class="text-primary-500/70 text-xs mt-0.5">Luna Aisyah – Dining Room</p>
+                        </div>
+                    </div>
+                    <button class="w-full bg-white border border-primary-200 text-primary-700 hover:bg-primary-50 text-[10px] font-black py-2 rounded-xl transition-all">Dismiss</button>
+                </div>
+
+                {{-- Accent divider info --}}
+                <div class="flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-xl px-4 py-2.5">
+                    <span class="material-symbols-outlined text-sm text-amber-600">info</span>
+                    <p class="text-[10px] text-amber-700 font-bold">AI sedang menganalisis feed kamera secara real-time.</p>
+                </div>
+
+                <button class="w-full text-center text-primary-700 text-xs font-black hover:underline pt-1">View Alert History</button>
+            </div>
         </div>
 
     </div>
-
 </div>
 @endsection

@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
                 'role'     => 'superadmin',
             ],
             [
-                'name'     => 'Super Admin',
+                'name'     => 'Admin',
                 'email'    => 'admin@ceria.id',
                 'password' => Hash::make('admin123'),
                 'role'     => 'admin',
