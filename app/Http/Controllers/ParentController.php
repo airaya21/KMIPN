@@ -11,4 +11,5 @@ class ParentController extends Controller
     public function activity()  { return view('parent.activity'); }
     public function reports()   { return view('parent.reports'); }
     public function messages()  { return view('parent.messages'); }
+    public function notifications() { return view('parent.notifications'); }
 }

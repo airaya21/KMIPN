@@ -45,6 +45,7 @@ Route::middleware(['auth', 'role:parent'])->group(function () {
     Route::get('/parent/activity',  [App\Http\Controllers\ParentController::class, 'activity'])->name('parent.activity');
     Route::get('/parent/reports',   [App\Http\Controllers\ParentController::class, 'reports'])->name('parent.reports');
     Route::get('/parent/messages',  [App\Http\Controllers\ParentController::class, 'messages'])->name('parent.messages');
+    Route::get('/parent/notifications', [App\Http\Controllers\ParentController::class, 'notifications'])->name('parent.notifications');
 });
 
 // ─── Pengasuh Dashboard ───────────────────────────────────────────────────────
