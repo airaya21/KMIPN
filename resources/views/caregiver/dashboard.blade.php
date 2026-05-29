@@ -1,6 +1,6 @@
 @extends('layouts.caregiver')
 
-@section('title', 'Dashboard Pengasuh')
+@section('title', 'Dashboard Caregiver')
 
 @section('header_title', 'Ringkasan Pengawasan Hari Ini')
 

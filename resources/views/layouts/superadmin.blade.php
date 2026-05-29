@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>CERIA Pusat Komando Nasional</title>
+    <title>CERIA | @yield('title', 'Pusat Kendali Daycare Indonesia')</title>
     
     <!-- Skrip Tema: Dijalankan lebih awal untuk mencegah kelap-kelip tema yang salah (FOUC) -->
     <script>
@@ -354,7 +354,7 @@
 
         <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
            href="{{ route('superadmin.alert-trends') }}">
-            Tren Peringatan
+            Analisis Peringatan
         </a>
 
         <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"

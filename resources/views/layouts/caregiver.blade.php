@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>CERIA | @yield('title', 'Dashboard Pengasuh')</title>
+    <title>CERIA @yield('title', 'Dashboard Caregiver')</title>
     
     <!-- Tema & Skrip Awal -->
     <script>

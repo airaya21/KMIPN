@@ -1,5 +1,5 @@
 @extends('layouts.superadmin')
-
+@section('title', 'Pusat Daycare')
 @section('content')
 
 <h1 class="text-display-md font-bold text-on-surface">
