@@ -224,151 +224,280 @@
     <nav class="flex flex-col gap-2 grow">
         <!-- Ringkasan (Overview) -->
         <a href="{{ route('superadmin.dashboard') }}"
-        class="flex items-center gap-3 px-4 py-3 bg-primary-container text-primary rounded-xl font-bold">
+        class="flex items-center gap-3 px-4 py-3
+        {{ request()->routeIs('superadmin.dashboard')
+         ? 'bg-primary-container text-primary rounded-xl font-bold'
+         : 'text-on-surface-variant hover:bg-surface-container-highest/50 rounded-xl transition-all' }}">
         <span class="material-symbols-outlined">dashboard</span>
         <span class="font-label-md text-label-md">Ringkasan</span>
         </a>
 
 <!-- Manajemen Daycare -->
+@php
+$isDaycareActive = request()->routeIs([
+    'superadmin.daycares',
+    'superadmin.verifications',
+    'superadmin.suspended'
+]);
+@endphp
+
 <div class="space-y-1">
-    <button onclick="toggleSidebarGroup(this)" class="w-full flex items-center justify-between px-4 py-3 text-on-surface-variant font-bold hover:bg-surface-container-highest/50 rounded-xl transition-all">
+    <button onclick="toggleSidebarGroup(this)"
+        class="w-full flex items-center justify-between px-4 py-3 text-on-surface-variant font-bold hover:bg-surface-container-highest/50 rounded-xl transition-all">
+
         <div class="flex items-center gap-3">
             <span class="material-symbols-outlined">child_care</span>
             <span class="font-label-md text-label-md">Manajemen Daycare</span>
         </div>
-        <span class="material-symbols-outlined text-lg transition-transform duration-200">expand_more</span>
+
+        <span class="material-symbols-outlined text-lg transition-transform duration-200 {{ $isDaycareActive ? 'rotate-180' : '' }}">
+            expand_more
+        </span>
     </button>
 
-    <div class="submenu overflow-hidden transition-all duration-300 max-h-0 flex flex-col pl-6">
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.daycares') }}">
+    <div class="submenu overflow-hidden transition-all duration-300 flex flex-col pl-6"
+         style="max-height: {{ $isDaycareActive ? '200px' : '0px' }}">
+
+        <a href="{{ route('superadmin.daycares') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.daycares')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Pusat Daycare
         </a>
 
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.verifications') }}">
+        <a href="{{ route('superadmin.verifications') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.verifications')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Verifikasi
         </a>
 
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.suspended') }}">
+        <a href="{{ route('superadmin.suspended') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.suspended')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Daycare Ditangguhkan
         </a>
+
     </div>
 </div>
 
 <!-- Pemantauan Nasional -->
+@php
+$isMonitoringActive = request()->routeIs([
+    'superadmin.live-alerts',
+    'superadmin.ai-monitoring',
+    'superadmin.emergency-center'
+]);
+@endphp
+
 <div class="space-y-1">
-    <button onclick="toggleSidebarGroup(this)" class="w-full flex items-center justify-between px-4 py-3 text-on-surface-variant font-bold hover:bg-surface-container-highest/50 rounded-xl transition-all">
+    <button onclick="toggleSidebarGroup(this)"
+        class="w-full flex items-center justify-between px-4 py-3 text-on-surface-variant font-bold hover:bg-surface-container-highest/50 rounded-xl transition-all">
+
         <div class="flex items-center gap-3">
             <span class="material-symbols-outlined">visibility</span>
             <span class="font-label-md text-label-md">Pemantauan Nasional</span>
         </div>
-        <span class="material-symbols-outlined text-lg transition-transform duration-200">expand_more</span>
+
+        <span class="material-symbols-outlined text-lg transition-transform duration-200 {{ $isMonitoringActive ? 'rotate-180' : '' }}">
+            expand_more
+        </span>
     </button>
 
-    <div class="submenu overflow-hidden transition-all duration-300 max-h-0 flex flex-col pl-6">
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.live-alerts') }}">
+    <div class="submenu overflow-hidden transition-all duration-300 flex flex-col pl-6"
+         style="max-height: {{ $isMonitoringActive ? '200px' : '0px' }}">
+
+        <a href="{{ route('superadmin.live-alerts') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.live-alerts')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Peringatan Langsung
         </a>
 
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.ai-monitoring') }}">
+        <a href="{{ route('superadmin.ai-monitoring') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.ai-monitoring')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Pemantauan AI
         </a>
 
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-error hover:bg-error/5 font-bold transition-all"
-           href="{{ route('superadmin.emergency-center') }}">
+        <a href="{{ route('superadmin.emergency-center') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.emergency-center')
+                ? 'text-error font-bold bg-error/10'
+                : 'text-error hover:bg-error/5 transition-all' }}">
             Pusat Darurat
         </a>
+
     </div>
 </div>
 
 <!-- Pengaduan -->
+@php
+$isComplaintActive = request()->routeIs([
+    'superadmin.parent-reports',
+    'superadmin.investigations'
+]);
+@endphp
+
 <div class="space-y-1">
-    <button onclick="toggleSidebarGroup(this)" class="w-full flex items-center justify-between px-4 py-3 text-on-surface-variant font-bold hover:bg-surface-container-highest/50 rounded-xl transition-all">
+    <button onclick="toggleSidebarGroup(this)"
+        class="w-full flex items-center justify-between px-4 py-3 text-on-surface-variant font-bold hover:bg-surface-container-highest/50 rounded-xl transition-all">
+
         <div class="flex items-center gap-3">
             <span class="material-symbols-outlined">report_problem</span>
             <span class="font-label-md text-label-md">Pengaduan</span>
         </div>
-        <span class="material-symbols-outlined text-lg transition-transform duration-200">expand_more</span>
+
+        <span class="material-symbols-outlined text-lg transition-transform duration-200 {{ $isComplaintActive ? 'rotate-180' : '' }}">
+            expand_more
+        </span>
     </button>
 
-    <div class="submenu overflow-hidden transition-all duration-300 max-h-0 flex flex-col pl-6">
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.parent-reports') }}">
+    <div class="submenu overflow-hidden transition-all duration-300 flex flex-col pl-6"
+         style="max-height: {{ $isComplaintActive ? '150px' : '0px' }}">
+
+        <a href="{{ route('superadmin.parent-reports') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.parent-reports')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Laporan Orang Tua
         </a>
 
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.investigations') }}">
+        <a href="{{ route('superadmin.investigations') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.investigations')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Penyelidikan
         </a>
+
     </div>
 </div>
 
 <!-- Pengguna -->
+@php
+$isUserActive = request()->routeIs([
+    'superadmin.parents',
+    'superadmin.caregivers',
+    'superadmin.admins'
+]);
+@endphp
+
 <div class="space-y-1">
-    <button onclick="toggleSidebarGroup(this)" class="w-full flex items-center justify-between px-4 py-3 text-on-surface-variant font-bold hover:bg-surface-container-highest/50 rounded-xl transition-all">
+    <button onclick="toggleSidebarGroup(this)"
+        class="w-full flex items-center justify-between px-4 py-3 text-on-surface-variant font-bold hover:bg-surface-container-highest/50 rounded-xl transition-all">
+
         <div class="flex items-center gap-3">
             <span class="material-symbols-outlined">group</span>
             <span class="font-label-md text-label-md">Pengguna</span>
         </div>
-        <span class="material-symbols-outlined text-lg transition-transform duration-200">expand_more</span>
+
+        <span class="material-symbols-outlined text-lg transition-transform duration-200 {{ $isUserActive ? 'rotate-180' : '' }}">
+            expand_more
+        </span>
     </button>
 
-    <div class="submenu overflow-hidden transition-all duration-300 max-h-0 flex flex-col pl-6">
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.parents') }}">
+    <div class="submenu overflow-hidden transition-all duration-300 flex flex-col pl-6"
+         style="max-height: {{ $isUserActive ? '200px' : '0px' }}">
+
+        <a href="{{ route('superadmin.parents') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.parents')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Orang Tua
         </a>
 
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.caregivers') }}">
+        <a href="{{ route('superadmin.caregivers') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.caregivers')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Pengasuh
         </a>
 
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.admins') }}">
+        <a href="{{ route('superadmin.admins') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.admins')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Admin Daycare
         </a>
+
     </div>
 </div>
 
 <!-- Analitik -->
+@php
+$isAnalyticsActive = request()->routeIs([
+    'superadmin.safety-score',
+    'superadmin.alert-trends',
+    'superadmin.reports'
+]);
+@endphp
+
 <div class="space-y-1">
-    <button onclick="toggleSidebarGroup(this)" class="w-full flex items-center justify-between px-4 py-3 text-on-surface-variant font-bold hover:bg-surface-container-highest/50 rounded-xl transition-all">
+    <button onclick="toggleSidebarGroup(this)"
+        class="w-full flex items-center justify-between px-4 py-3 text-on-surface-variant font-bold hover:bg-surface-container-highest/50 rounded-xl transition-all">
+
         <div class="flex items-center gap-3">
             <span class="material-symbols-outlined">analytics</span>
             <span class="font-label-md text-label-md">Analitik</span>
         </div>
-        <span class="material-symbols-outlined text-lg transition-transform duration-200">expand_more</span>
+
+        <span class="material-symbols-outlined text-lg transition-transform duration-200 {{ $isAnalyticsActive ? 'rotate-180' : '' }}">
+            expand_more
+        </span>
     </button>
 
-    <div class="submenu overflow-hidden transition-all duration-300 max-h-0 flex flex-col pl-6">
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.safety-score') }}">
+    <div class="submenu overflow-hidden transition-all duration-300 flex flex-col pl-6"
+         style="max-height: {{ $isAnalyticsActive ? '200px' : '0px' }}">
+
+        <a href="{{ route('superadmin.safety-score') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.safety-score')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Skor Keselamatan
         </a>
 
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.alert-trends') }}">
+        <a href="{{ route('superadmin.alert-trends') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.alert-trends')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Analisis Peringatan
         </a>
 
-        <a class="flex items-center py-2 px-4 rounded-lg text-body-sm text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all"
-           href="{{ route('superadmin.reports') }}">
+        <a href="{{ route('superadmin.reports') }}"
+           class="flex items-center py-2 px-4 rounded-lg text-body-sm
+           {{ request()->routeIs('superadmin.reports')
+                ? 'text-primary font-bold bg-primary-container/30'
+                : 'text-on-surface-variant hover:bg-surface-container-highest/30 hover:text-primary transition-all' }}">
             Laporan
         </a>
+
     </div>
 </div>
 
 <!-- Paket Langganan -->
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all mt-4 active:scale-95 duration-200"
-   href="{{ route('superadmin.subscriptions') }}">
+<a href="{{ route('superadmin.subscriptions') }}"
+   class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all mt-4 active:scale-95 duration-200
+   {{ request()->routeIs('superadmin.subscriptions')
+        ? 'bg-primary-container text-primary font-bold'
+        : 'text-on-surface-variant hover:bg-surface-container-highest' }}">
+
     <span class="material-symbols-outlined">payments</span>
     <span class="font-label-md text-label-md">Paket Langganan</span>
+
 </a>
     </nav>
     
@@ -505,10 +634,6 @@
             submenu.style.maxHeight = '0px';
             arrow.classList.remove('rotate-180');
         } else {
-            // Tutup akordeon lainnya terlebih dahulu
-            document.querySelectorAll('.submenu').forEach(el => el.style.maxHeight = '0px');
-            document.querySelectorAll('.rotate-180').forEach(el => el.classList.remove('rotate-180'));
-            
             submenu.style.maxHeight = submenu.scrollHeight + 'px';
             arrow.classList.add('rotate-180');
         }
