@@ -93,6 +93,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     // ─── Kelola Akun Orang Tua & Pengasuh (CRUD) ──────────────
     Route::resource('/admin/users', \App\Http\Controllers\AdminUserController::class)->names('admin.users');
+    Route::post('/admin/users/{user}/reset-password', [\App\Http\Controllers\AdminUserController::class, 'resetPassword'])->name('admin.users.resetPassword');
 });
 
 // ─── Orang Tua Dashboard ──────────────────────────────────────────────────────
@@ -113,4 +114,10 @@ Route::middleware(['auth', 'role:caregiver'])->group(function () {
     Route::get('/caregiver/activity',  [App\Http\Controllers\CaregiverController::class, 'activity'])->name('caregiver.activity');
     Route::get('/caregiver/schedule',  [App\Http\Controllers\CaregiverController::class, 'schedule'])->name('caregiver.schedule');
     Route::get('/caregiver/reports',   [App\Http\Controllers\CaregiverController::class, 'reports'])->name('caregiver.reports');
+});
+
+// ─── Profil (Ganti Password) — diakses Parent & Caregiver ─────────────────────
+Route::middleware(['auth', 'role:parent,caregiver'])->group(function () {
+    Route::get('/profile/ganti-password',  [\App\Http\Controllers\ProfileController::class, 'showChangePassword'])->name('profile.change-password');
+    Route::post('/profile/ganti-password', [\App\Http\Controllers\ProfileController::class, 'updatePassword'])->name('profile.update-password');
 });

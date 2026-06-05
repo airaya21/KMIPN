@@ -91,15 +91,18 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email'    => 'required|email',
+            'email'    => 'required|string',
             'password' => 'required|string',
         ], [
-            'email.required'    => 'Email wajib diisi.',
-            'email.email'       => 'Format email tidak valid.',
+            'email.required'    => 'Email atau username wajib diisi.',
             'password.required' => 'Kata sandi wajib diisi.',
         ]);
 
-        $credentials = $request->only('email', 'password');
+        $loginField = $request->email;
+
+        // Deteksi apakah input adalah email atau username
+        $fieldType = filter_var($loginField, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $credentials = [$fieldType => $loginField, 'password' => $request->password];
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $user = Auth::user();
@@ -115,7 +118,7 @@ class AuthController extends Controller
         }
 
         return back()
-            ->withErrors(['email' => 'Email atau kata sandi salah. Silakan coba lagi.'])
+            ->withErrors(['email' => 'Email/username atau kata sandi salah. Silakan coba lagi.'])
             ->withInput($request->except('password'));
     }
 

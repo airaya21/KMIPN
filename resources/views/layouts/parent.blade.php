@@ -115,13 +115,17 @@
       </button>
     </div>
 
-    <form method="POST" action="{{ route('logout') }}">
-      @csrf
-      <button type="submit" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold text-red-500 hover:bg-red-50 hover:text-red-600 transition-all duration-300 group">
-        <span class="material-symbols-outlined text-[20px] group-hover:-translate-x-1 transition-transform">logout</span> 
-        Keluar
-      </button>
-    </form>
+    <div class="space-y-1">
+        <a href="{{ route('profile.change-password') }}" class="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold {{ request()->routeIs('profile.change-password') ? 'bg-amber-100 text-amber-800' : 'text-slate-600 hover:bg-amber-50 hover:text-amber-700' }} transition-colors">
+            <span class="material-symbols-outlined text-[20px]">lock_reset</span> Ganti Password
+        </a>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold text-red-600 hover:bg-red-50 transition-colors">
+                <span class="material-symbols-outlined text-[20px]">logout</span> Keluar
+            </button>
+        </form>
+    </div>
   </div>
 </aside>
 

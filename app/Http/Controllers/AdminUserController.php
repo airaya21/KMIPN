@@ -114,4 +114,26 @@ class AdminUserController extends Controller
 
         return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil dihapus.');
     }
+
+    /**
+     * Reset password secara otomatis.
+     */
+    public function resetPassword(User $user)
+    {
+        if (!in_array($user->role, ['parent', 'caregiver'])) {
+            abort(403, 'Anda tidak diizinkan mereset password pengguna ini.');
+        }
+
+        // Generate password acak: 3 huruf besar + 3 angka + 2 huruf kecil + 1 simbol
+        $newPassword = substr(str_shuffle('ABCDEFGHJKLMNPQRSTUVWXYZ'), 0, 3)
+                     . rand(100, 999)
+                     . substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'), 0, 2)
+                     . substr(str_shuffle('!@#$%'), 0, 1);
+
+        $user->update(['password' => Hash::make($newPassword)]);
+
+        return redirect()->route('admin.users.edit', $user)
+            ->with('reset_password', $newPassword)
+            ->with('reset_name', $user->name);
+    }
 }

@@ -269,14 +269,32 @@
             Laporan
         </span>
     </a>
+    <!-- Ganti Password -->
+    <a href="{{ route('profile.change-password') }}"
+       class="flex items-center gap-3 px-4 py-3
+       {{ request()->routeIs('profile.change-password')
+            ? 'bg-primary-container text-primary rounded-xl font-bold'
+            : 'text-on-surface-variant hover:bg-surface-container-highest/50 rounded-xl transition-all' }}">
+        <span class="material-symbols-outlined">lock_reset</span>
+        <span class="text-sm {{ request()->routeIs('profile.change-password') ? 'font-bold' : 'font-medium' }}">
+            Ganti Password
+        </span>
+    </a>
 
 </nav>
     
-    <div class="mt-auto pt-6 border-t border-outline-variant/30">
-        <div class="flex items-center gap-3 px-4 py-2 text-xs text-outline">
+    <div class="mt-auto pt-6 border-t border-outline-variant/30 space-y-1">
+        <div class="flex items-center gap-3 px-4 py-2 text-xs text-outline cursor-pointer hover:text-on-surface">
             <span class="material-symbols-outlined text-sm">help</span>
             <span>Pusat Bantuan</span>
         </div>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="w-full flex items-center gap-3 px-4 py-2 text-xs text-red-500 hover:bg-red-50 rounded-xl transition-all">
+                <span class="material-symbols-outlined text-sm">logout</span>
+                <span>Keluar</span>
+            </button>
+        </form>
     </div>
 </aside>
 
