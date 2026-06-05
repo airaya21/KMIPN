@@ -90,6 +90,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/history', [App\Http\Controllers\AdminController::class, 'history'])->name('admin.history');
     Route::get('/admin/children',   [App\Http\Controllers\AdminController::class, 'children'])->name('admin.children');
     Route::get('/admin/reports',    [App\Http\Controllers\AdminController::class, 'reports'])->name('admin.reports');
+
+    // ─── Kelola Akun Orang Tua & Pengasuh (CRUD) ──────────────
+    Route::resource('/admin/users', \App\Http\Controllers\AdminUserController::class)->names('admin.users');
 });
 
 // ─── Orang Tua Dashboard ──────────────────────────────────────────────────────
