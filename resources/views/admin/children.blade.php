@@ -1,24 +1,24 @@
 @extends('layouts.admin')
 
-@section('title', 'Manage Children')
-@section('header_title', 'Children Records')
+@section('title', 'Kelola Data Anak')
+@section('header_title', 'Data Anak')
 
 @section('content')
 <div class="space-y-6 max-w-[1600px] mx-auto w-full">
     <!-- Header Actions -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-6 rounded-3xl shadow-sm border border-slate-50">
         <div>
-            <h3 class="text-xl font-bold text-slate-800">Enrollment List</h3>
-            <p class="text-sm text-slate-400">Manage all children registered in the system</p>
+            <h3 class="text-xl font-bold text-slate-800">Daftar Anak</h3>
+            <p class="text-sm text-slate-400">Kelola semua anak yang terdaftar di sistem</p>
         </div>
         <div class="flex gap-3 w-full md:w-auto">
             <button class="flex-1 md:flex-none border border-slate-200 text-slate-600 px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-slate-50 transition-all">
                 <span class="material-symbols-outlined text-lg">filter_list</span>
-                Filters
+                Filter
             </button>
-            <button class="flex-1 md:flex-none bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+            <button class="flex-1 md:flex-none bg-amber-400 text-amber-900 px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-amber-500 transition-all shadow-md shadow-amber-400/30">
                 <span class="material-symbols-outlined text-lg">add</span>
-                Enroll New Child
+                Daftarkan Anak Baru
             </button>
         </div>
     </div>
@@ -29,21 +29,21 @@
             <table class="w-full text-left">
                 <thead class="bg-slate-50/50">
                     <tr>
-                        <th class="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest font-bold">Child Name</th>
-                        <th class="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest font-bold">Age</th>
-                        <th class="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest font-bold">Assigned Caregiver</th>
-                        <th class="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest font-bold">Health Status</th>
-                        <th class="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest font-bold text-right">Profile</th>
+                        <th class="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest font-bold">Nama Anak</th>
+                        <th class="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest font-bold">Usia</th>
+                        <th class="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest font-bold">Pengasuh</th>
+                        <th class="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest font-bold">Status Kesehatan</th>
+                        <th class="px-8 py-4 text-[10px] text-slate-400 uppercase tracking-widest font-bold text-right">Profil</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-50">
                     @foreach([
-                        ['name' => 'Ethan James', 'age' => '3 years', 'cg' => 'Maria S.', 'status' => 'Perfect', 'color' => 'green'],
-                        ['name' => 'Mia Lopez', 'age' => '2 years 8 months', 'cg' => 'Robert K.', 'status' => 'Good', 'color' => 'blue'],
-                        ['name' => 'Oliver White', 'age' => '4 years', 'cg' => 'Maria S.', 'status' => 'Reviewing', 'color' => 'yellow'],
-                        ['name' => 'Sophia Chen', 'age' => '3 years 2 months', 'cg' => 'Robert K.', 'status' => 'Perfect', 'color' => 'green'],
-                        ['name' => 'Leo Brown', 'age' => '2 years 1 month', 'cg' => 'Maria S.', 'status' => 'Needs Attention', 'color' => 'red'],
-                        ['name' => 'Ava Wilson', 'age' => '3 years 6 months', 'cg' => 'Sarah P.', 'status' => 'Perfect', 'color' => 'green'],
+                        ['name' => 'Ethan James', 'age' => '3 tahun', 'cg' => 'Maria S.', 'status' => 'Sempurna', 'color' => 'green'],
+                        ['name' => 'Mia Lopez', 'age' => '2 tahun 8 bulan', 'cg' => 'Robert K.', 'status' => 'Baik', 'color' => 'blue'],
+                        ['name' => 'Oliver White', 'age' => '4 tahun', 'cg' => 'Maria S.', 'status' => 'Ditinjau', 'color' => 'yellow'],
+                        ['name' => 'Sophia Chen', 'age' => '3 tahun 2 bulan', 'cg' => 'Robert K.', 'status' => 'Sempurna', 'color' => 'green'],
+                        ['name' => 'Leo Brown', 'age' => '2 tahun 1 bulan', 'cg' => 'Maria S.', 'status' => 'Butuh Perhatian', 'color' => 'red'],
+                        ['name' => 'Ava Wilson', 'age' => '3 tahun 6 bulan', 'cg' => 'Sarah P.', 'status' => 'Sempurna', 'color' => 'green'],
                     ] as $child)
                     <tr class="hover:bg-slate-50/50 transition-colors">
                         <td class="px-8 py-5 flex items-center gap-4">
@@ -64,7 +64,7 @@
                             </div>
                         </td>
                         <td class="px-8 py-5 text-right">
-                            <button class="text-primary font-bold text-xs hover:underline">View Details</button>
+                            <button class="text-[#005F8D] font-bold text-xs hover:underline">Lihat Detail</button>
                         </td>
                     </tr>
                     @endforeach
@@ -72,12 +72,12 @@
             </table>
         </div>
         <div class="px-8 py-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center">
-            <p class="text-[10px] text-slate-400 font-bold uppercase">Showing 6 of 124 Children</p>
+            <p class="text-[10px] text-slate-400 font-bold uppercase">Menampilkan 6 dari 124 Anak</p>
             <div class="flex gap-2">
-                <button class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary transition-all">
+                <button class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-[#005F8D] transition-all">
                     <span class="material-symbols-outlined text-lg">chevron_left</span>
                 </button>
-                <button class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary transition-all">
+                <button class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-[#005F8D] transition-all">
                     <span class="material-symbols-outlined text-lg">chevron_right</span>
                 </button>
             </div>
