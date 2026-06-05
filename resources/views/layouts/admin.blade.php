@@ -26,7 +26,8 @@
       <img src="/images/logo-CERIA.png" alt="CERIA" class="w-6 h-6 object-contain" onerror="this.src='https://ui-avatars.com/api/?name=Ceria&background=005da7&color=fff&rounded=true'">
     </div>
     <div>
-      <h1 class="font-extrabold text-lg text-slate-800">CERIA</h1>
+      {{-- Ubah warna teks CERIA menjadi #FFD600 --}}
+      <h1 class="font-extrabold text-lg text-[#FFD600] drop-shadow-sm">CERIA</h1>
       <p class="text-[10px] uppercase tracking-widest text-blue-600 font-bold">Portal Admin</p>
     </div>
   </div>

@@ -138,38 +138,42 @@
         </div>
     </div>
 
-    {{-- ── Zona Berbahaya: Reset Password ── --}}
-    <div class="bg-white rounded-[2rem] shadow-sm border border-red-100 overflow-hidden">
-        <div class="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+{{-- ── Zona Berbahaya: Reset Password ── --}}
+<div class="bg-white rounded-[2rem] shadow-sm border border-red-200 overflow-hidden">
+    <div class="p-6">
+        {{-- Header dengan label Danger Zone --}}
+        <div class="flex items-center gap-2 mb-4">
+            <span class="material-symbols-outlined text-red-500 text-lg">error</span>
+            <span class="text-xs font-bold uppercase tracking-wider text-red-600">Zona Berbahaya</span>
+        </div>
+
+        {{-- Konten: flex row di desktop, column di mobile --}}
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            {{-- Kiri: Ikon + Teks --}}
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-red-50 rounded-2xl flex items-center justify-center text-red-500 flex-shrink-0">
-                    <span class="material-symbols-outlined text-2xl">lock_reset</span>
+                <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-red-500 text-xl">lock_reset</span>
                 </div>
                 <div>
                     <h4 class="font-bold text-slate-800 text-sm">Reset Password</h4>
-                    <p class="text-xs text-slate-400 mt-0.5">Sistem akan membuat password acak baru dan menampilkannya sekali kepada Anda untuk diteruskan ke pengguna.</p>
+                    <p class="text-xs text-slate-500 mt-0.5">
+                        Sistem akan membuat password acak baru dan menampilkannya sekali kepada Anda untuk diteruskan ke pengguna.
+                    </p>
                 </div>
             </div>
+
+            {{-- Kanan: Tombol Reset --}}
             <form action="{{ route('admin.users.resetPassword', $user) }}" method="POST"
-                onsubmit="return confirm('Apakah Anda yakin ingin mereset password {{ $user->name }}? Password lama tidak dapat dipulihkan.')">
+                onsubmit="return confirm('Apakah Anda yakin ingin mereset password {{ $user->name }}? Password lama tidak dapat dipulihkan.')"
+                class="sm:flex-shrink-0 w-full sm:w-auto">
                 @csrf
-                <button type="submit" class="flex-shrink-0 h-11 px-6 bg-red-50 text-red-600 border border-red-200 rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-red-100 transition-all">
-                    <span class="material-symbols-outlined text-[18px]">autorenew</span> Reset Password Sekarang
+                <button type="submit" 
+                    class="w-full sm:w-auto h-11 px-6 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md">
+                    <span class="material-symbols-outlined text-[18px]">autorenew</span>
+                    Reset Password Sekarang
                 </button>
             </form>
         </div>
     </div>
-
 </div>
-
-@section('scripts')
-<style>
-@keyframes bounce-in {
-    0% { transform: scale(0.8); opacity: 0; }
-    70% { transform: scale(1.05); opacity: 1; }
-    100% { transform: scale(1); }
-}
-.animate-bounce-in { animation: bounce-in 0.4s ease-out; }
-</style>
-@endsection
 @endsection
