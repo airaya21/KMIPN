@@ -26,7 +26,61 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 // ─── Super Admin Dashboard ──────────────────────────────────────────────────────
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
-    Route::get('/superadmin/dashboard', [App\Http\Controllers\SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
+
+    // Dashboard Utama
+    Route::get('/superadmin/dashboard', [App\Http\Controllers\SuperAdminController::class, 'dashboard'])
+        ->name('superadmin.dashboard');
+
+    // ─── Manajemen Daycare ─────────────────────────────────────
+    Route::get('/superadmin/daycares', [App\Http\Controllers\SuperAdminController::class, 'daycares'])
+        ->name('superadmin.daycares');
+
+    Route::get('/superadmin/verifications', [App\Http\Controllers\SuperAdminController::class, 'verifications'])
+        ->name('superadmin.verifications');
+
+    Route::get('/superadmin/suspended', [App\Http\Controllers\SuperAdminController::class, 'suspended'])
+        ->name('superadmin.suspended');
+
+    // ─── Pemantauan Nasional ───────────────────────────────────
+    Route::get('/superadmin/live-alerts', [App\Http\Controllers\SuperAdminController::class, 'liveAlerts'])
+        ->name('superadmin.live-alerts');
+
+    Route::get('/superadmin/ai-monitoring', [App\Http\Controllers\SuperAdminController::class, 'aiMonitoring'])
+        ->name('superadmin.ai-monitoring');
+
+    Route::get('/superadmin/emergency-center', [App\Http\Controllers\SuperAdminController::class, 'emergencyCenter'])
+        ->name('superadmin.emergency-center');
+
+    // ─── Pengaduan ─────────────────────────────────────────────
+    Route::get('/superadmin/parent-reports', [App\Http\Controllers\SuperAdminController::class, 'parentReports'])
+        ->name('superadmin.parent-reports');
+
+    Route::get('/superadmin/investigations', [App\Http\Controllers\SuperAdminController::class, 'investigations'])
+        ->name('superadmin.investigations');
+
+    // ─── Pengguna ──────────────────────────────────────────────
+    Route::get('/superadmin/parents', [App\Http\Controllers\SuperAdminController::class, 'parents'])
+        ->name('superadmin.parents');
+
+    Route::get('/superadmin/caregivers', [App\Http\Controllers\SuperAdminController::class, 'caregivers'])
+        ->name('superadmin.caregivers');
+
+    Route::get('/superadmin/admins', [App\Http\Controllers\SuperAdminController::class, 'admins'])
+        ->name('superadmin.admins');
+
+    // ─── Analitik ──────────────────────────────────────────────
+    Route::get('/superadmin/safety-score', [App\Http\Controllers\SuperAdminController::class, 'safetyScore'])
+        ->name('superadmin.safety-score');
+
+    Route::get('/superadmin/alert-trends', [App\Http\Controllers\SuperAdminController::class, 'alertTrends'])
+        ->name('superadmin.alert-trends');
+
+    Route::get('/superadmin/reports', [App\Http\Controllers\SuperAdminController::class, 'reports'])
+        ->name('superadmin.reports');
+
+    // ─── Paket Langganan ───────────────────────────────────────
+    Route::get('/superadmin/subscriptions', [App\Http\Controllers\SuperAdminController::class, 'subscriptions'])
+        ->name('superadmin.subscriptions');
 });
 
 // ─── Admin Dashboard ──────────────────────────────────────────────────────────
@@ -44,7 +98,9 @@ Route::middleware(['auth', 'role:parent'])->group(function () {
     Route::get('/parent/children',  [App\Http\Controllers\ParentController::class, 'children'])->name('parent.children');
     Route::get('/parent/activity',  [App\Http\Controllers\ParentController::class, 'activity'])->name('parent.activity');
     Route::get('/parent/reports',   [App\Http\Controllers\ParentController::class, 'reports'])->name('parent.reports');
+    Route::get('/parent/pickup',    [App\Http\Controllers\ParentController::class, 'pickup'])->name('parent.pickup');
     Route::get('/parent/messages',  [App\Http\Controllers\ParentController::class, 'messages'])->name('parent.messages');
+    Route::get('/parent/notifications', [App\Http\Controllers\ParentController::class, 'notifications'])->name('parent.notifications');
 });
 
 // ─── Pengasuh Dashboard ───────────────────────────────────────────────────────
